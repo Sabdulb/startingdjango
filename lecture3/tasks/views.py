@@ -5,8 +5,6 @@ from django.urls import reverse
 
 
 
-tasks = []
-
 class NewTaskForm(forms.Form):
     task = forms.CharField(label = "New Task")
     # priority = forms.IntegerField(label = "Priority", min_value=1, max_value=10)
@@ -14,8 +12,11 @@ class NewTaskForm(forms.Form):
 # Create your views here.
 
 def index(request):
+    if "tasks" not in request.session:
+        request.sessions["tasks"] = []
+
     return render(request, "tasks/index.html", {
-        "tasks": tasks
+        "tasks": request.session["tasks"]
     })
 
 def add(request):
