@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 
-tasks = ["foo", "bar", "baz"]
+tasks = []
 
 class NewTaskForm(forms.Form):
     task = forms.CharField(label = "New Task")
