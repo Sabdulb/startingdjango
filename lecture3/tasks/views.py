@@ -16,7 +16,7 @@ def index(request):
         request.sessions["tasks"] = []
 
     return render(request, "tasks/index.html", {
-        "tasks": request.session["tasks"]
+        "tasks": request.sessions["tasks"]
     })
 
 def add(request):
@@ -24,7 +24,7 @@ def add(request):
         form = NewTaskForm(request.POST)
         if form.is_valid():
             task = form.cleaned_data["task"]
-            tasks.append(task)
+            request.sessions["tasks"].append(task)
             return HttpResponseRedirect(reverse("tasks:index"))
         else:
             return render(request, "tasks/add.html", {
